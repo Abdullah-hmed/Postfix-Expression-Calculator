@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Scanner;
 public class Testing {
     public static void main(String[] args){
@@ -11,34 +12,20 @@ public class Testing {
 
             String exp = input.nextLine();
 
-            exp = exp.replaceAll("\\s", "");
-
-            if(exp.equals("q")){
+            
+            if(exp.equals("q")){ //to quit
                 break;
             }
             
             float var1,var2,result;
 
 
-            char[] expChar = exp.toCharArray();
+            String[] expChar = exp.split(" "); //splits user input into individual values
 
 
             for (int i = 0; i< expChar.length; i++) {
                 switch (expChar[i]) {
-                    case '0':
-                    case '1':
-                    case '2':
-                    case '3':
-                    case '4':
-                    case '5':
-                    case '6':
-                    case '7':
-                    case '8':
-                    case '9':
-                        int value = expChar[i]-'0';
-                        mystack.Push(value);
-                        break;
-                    case '+':
+                    case "+": 
                         var2 = mystack.Peek();
                         mystack.Pop();
                         var1 = mystack.Peek();
@@ -46,7 +33,7 @@ public class Testing {
                         result = var1+var2;
                         mystack.Push(result);
                         break;
-                    case '*':
+                    case "*":
                         var2 = mystack.Peek();
                         mystack.Pop();
                         var1 = mystack.Peek();
@@ -54,7 +41,7 @@ public class Testing {
                         result = var1*var2;
                         mystack.Push(result);
                         break;
-                    case '-':
+                    case "-":
                         var2 = mystack.Peek();
                         mystack.Pop();
                         var1 = mystack.Peek();
@@ -62,7 +49,7 @@ public class Testing {
                         result = var1-var2;
                         mystack.Push(result);
                         break;
-                    case '/':
+                    case "/":
                         var2 = mystack.Peek();
                         mystack.Pop();
                         var1 = mystack.Peek();
@@ -70,7 +57,7 @@ public class Testing {
                         result = var1/var2;
                         mystack.Push(result);
                         break;
-                    case '^':
+                    case "^":
                         var2 = mystack.Peek();
                         mystack.Pop();
                         var1 = mystack.Peek();
@@ -79,14 +66,13 @@ public class Testing {
                         result = (int) Math.pow(var1, var2);
                         mystack.Push(result);
                         break;
-    //                default:
-    //                    if (expChar[i] == '?') {
-    //                        break OUTER;
-    //                    }
-    //                    break;
+                    default: //handles the numbers inputted by user.
+                        float num = Float.parseFloat(expChar[i]);
+                        mystack.Push(num);
+                        break;
                 }
             }
-            System.out.println("The answer is :"+mystack.Peek());
+            System.out.println("The answer is :"+mystack.Peek()+"\n");
             
         }
     } 
